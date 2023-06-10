@@ -21,11 +21,18 @@ const Navbar = () => {
           Classes
         </Link>
       </li>
+      {user && (
+        <li>
+          <Link to="/dashboard" className="text-white px-2 mx-1">
+            Dashboard
+          </Link>
+        </li>
+      )}
     </>
   );
 
   return (
-    <div className="border-b-2 bg-[#1ec0ff] ">
+    <div className="bg-[#1ec0ff] ">
       <div className="max-w-7xl mx-auto  navbar">
         <div className="navbar-start">
           <div className="dropdown">

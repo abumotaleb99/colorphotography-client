@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Banner from "./Banner";
 
 const Home = () => {
+  useEffect(() => {
+    document.title = "ColorPhotography | Home";
+  }, []);
+
   return (
-    <div>
-      <h2>Home</h2>
-    </div>
+    <>
+      <Banner></Banner>
+    </>
   );
 };
 
