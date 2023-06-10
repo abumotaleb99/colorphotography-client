@@ -1,7 +1,7 @@
 import React from "react";
 import img1 from "../../assets/classes/class1.jpg";
 
-const TopClasses = () => {
+const PopularClasses = () => {
   return (
     <div className="max-w-7xl mx-auto px-5 md:px-0 py-8 md:py-16">
       <div className="pb-8">
@@ -86,4 +86,4 @@ const TopClasses = () => {
   );
 };
 
-export default TopClasses;
+export default PopularClasses;

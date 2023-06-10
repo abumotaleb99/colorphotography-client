@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Banner from "./Banner";
-import TopClasses from "./TopClasses";
+import PopularClasses from "./PopularClasses";
+import PopularInstructors from "./PopularInstructors";
 
 const Home = () => {
   useEffect(() => {
@@ -10,7 +11,8 @@ const Home = () => {
   return (
     <>
       <Banner></Banner>
-      <TopClasses></TopClasses>
+      <PopularClasses></PopularClasses>
+      <PopularInstructors></PopularInstructors>
     </>
   );
 };
