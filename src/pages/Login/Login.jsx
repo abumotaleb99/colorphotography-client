@@ -20,6 +20,40 @@ const Login = () => {
 
   const from = location.state?.from?.pathname || "/";
 
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const loggedUser = result.user;
+
+        if (!isUser) {
+          const saveUser = {
+            name: loggedUser.displayName,
+            email: loggedUser.email,
+            image: loggedUser.photoURL,
+          };
+
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(saveUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                navigate(from, { replace: true });
+              }
+            })
+            .catch((error) => console.log(error));
+        }
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const onSubmit = (data) => {
     signIn(data.email, data.password)
       .then((result) => {
@@ -85,7 +119,10 @@ const Login = () => {
         <div className="flex items-center justify-center w-full mt-6 border border-t">
           <div className="absolute px-5 bg-white">Or</div>
         </div>
-        <button className="w-full text-base tracking-wide flex justify-center items-center border gap-5 rounded-md cursor-pointer  px-4 py-2 mt-5">
+        <button
+          onClick={handleGoogleSignIn}
+          className="w-full text-base tracking-wide flex justify-center items-center border gap-5 rounded-md cursor-pointer  px-4 py-2 mt-5"
+        >
           <FaGoogle className="text-orange-400" /> Sign In with Google
         </button>
 

@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { getAuth, updateProfile } from "firebase/auth";
 import app from "../../firebase/firebase.config";
+import useUser from "../../hooks/useUser";
+import { useState } from "react";
 
 const auth = getAuth(app);
 
@@ -13,9 +15,47 @@ const img_hosting_token = import.meta.env.VITE_Image_Token;
 const Register = () => {
   const { createUser, googleSignIn } = useContext(AuthContext);
 
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
+
+  const [isUser] = useUser();
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const loggedUser = result.user;
+
+        if (!isUser) {
+          const saveUser = {
+            name: loggedUser.displayName,
+            email: loggedUser.email,
+            image: loggedUser.photoURL,
+          };
+
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(saveUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                navigate("/");
+              }
+            })
+            .catch((error) => console.log(error));
+        }
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const {
     register,
@@ -63,7 +103,22 @@ const Register = () => {
                   navigate("/");
                 }
               })
-              .catch((error) => console.log(error));
+              .catch((error) => {
+                switch (error) {
+                  case "auth/wrong-password":
+                    setError(`Password didn't match.`);
+                    break;
+                  case "(auth/user-not-found":
+                    setError("User not found.");
+                    break;
+                  case "(auth/email-already-in-use":
+                    setError("This email already used.");
+                    break;
+                  default:
+                    setError(error.message);
+                    break;
+                }
+              });
           });
         }
       });
@@ -74,7 +129,7 @@ const Register = () => {
       <div className="w-full md:max-w-lg m-auto border bg-white rounded-md px-6 py-12">
         <h1 className="text-3xl font-bold">Sign Up</h1>
 
-        <p className="text-sm  text-red-500 font-medium py-2"></p>
+        <p className="text-sm  text-red-500 font-medium py-2">{error}</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-2">
           <div className="mb-2">
@@ -170,7 +225,10 @@ const Register = () => {
         <div className="flex items-center justify-center w-full mt-6 border border-t">
           <div className="absolute px-5 bg-white">Or</div>
         </div>
-        <button className="w-full text-base tracking-wide flex justify-center items-center border gap-5 rounded-md cursor-pointer  px-4 py-2 mt-5">
+        <button
+          onClick={handleGoogleSignIn}
+          className="w-full text-base tracking-wide flex justify-center items-center border gap-5 rounded-md cursor-pointer  px-4 py-2 mt-5"
+        >
           <FaGoogle className="text-orange-400" /> Sign In with Google
         </button>
         <p className="text-sm font-medium mt-4">
