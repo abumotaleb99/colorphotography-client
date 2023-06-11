@@ -1,8 +1,18 @@
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
-  const user = false;
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        localStorage.removeItem("access-token");
+      })
+      .catch((error) => console.log(error));
+  };
 
   const navItems = (
     <>
@@ -68,7 +78,10 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {user ? (
-            <button className="text-white bg-[#3A5BF0] hover:bg-[#1D4CAA] px-7 py-2 rounded-md">
+            <button
+              onClick={handleLogOut}
+              className="text-white bg-[#3A5BF0] hover:bg-[#1D4CAA] px-7 py-2 rounded-md"
+            >
               LogOut
             </button>
           ) : (
@@ -86,7 +99,7 @@ const Navbar = () => {
                 className="btn btn-ghost btn-circle avatar hover:bg-[#1D4CAA] mr-2 md:ms-2"
               >
                 <div className="w-10 rounded-full">
-                  <img src="" title="" />
+                  <img src={user.photoURL} title={user.displayName} />
                 </div>
               </label>
             )}
