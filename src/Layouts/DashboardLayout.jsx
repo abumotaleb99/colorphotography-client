@@ -1,7 +1,10 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import useUser from "../hooks/useUser";
 
 const DashboardLayout = () => {
+  const [isUser] = useUser();
+
   return (
     <div>
       <div className="bg-[#1ec0ff] flex justify-between items-center px-8 py-3 lg:py-5">
@@ -25,21 +28,61 @@ const DashboardLayout = () => {
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 h-full bg-[#1ec0ff] border-t-2">
             {/* Sidebar content here */}
-            <li>
-              <Link to="" className="text-white px-2 mx-1">
-                Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link to="manage-classes" className="text-white px-2 mx-1">
-                Manage Classes
-              </Link>
-            </li>
-            <li>
-              <Link to="manage-users" className="text-white px-2 mx-1">
-                Manage Users
-              </Link>
-            </li>
+            {isUser?.role === "admin" ? (
+              <>
+                <li>
+                  <Link to="" className="text-white px-2 mx-1">
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link to="manage-classes" className="text-white px-2 mx-1">
+                    Manage Classes
+                  </Link>
+                </li>
+                <li>
+                  <Link to="manage-users" className="text-white px-2 mx-1">
+                    Manage Users
+                  </Link>
+                </li>
+              </>
+            ) : isUser?.role == "instructor" ? (
+              <>
+                <li>
+                  <Link to="" className="text-white px-2 mx-1">
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link to="add-class" className="text-white px-2 mx-1">
+                    Add a Class
+                  </Link>
+                </li>
+                <li>
+                  <Link to="my-classes" className="text-white px-2 mx-1">
+                    My Classes
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link to="" className="text-white px-2 mx-1">
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link to="selected-classes" className="text-white px-2 mx-1">
+                    My Selected Classes
+                  </Link>
+                </li>
+                <li>
+                  <Link to="enrolled-classes" className="text-white px-2 mx-1">
+                    My Enrolled Classes
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
