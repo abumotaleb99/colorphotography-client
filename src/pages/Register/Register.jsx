@@ -13,6 +13,10 @@ const auth = getAuth(app);
 const img_hosting_token = import.meta.env.VITE_Image_Token;
 
 const Register = () => {
+  useEffect(() => {
+    document.title = "ColorPhotography | Register";
+  }, []);
+
   const { createUser, googleSignIn } = useContext(AuthContext);
 
   const [error, setError] = useState("");

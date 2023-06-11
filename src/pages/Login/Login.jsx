@@ -5,6 +5,10 @@ import { FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
+  useEffect(() => {
+    document.title = "ColorPhotography | Login";
+  }, []);
+
   const { signIn, googleSignIn } = useContext(AuthContext);
 
   const [error, setError] = useState("");
