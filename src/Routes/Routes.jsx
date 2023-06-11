@@ -9,6 +9,8 @@ import DashboardLayout from "../Layouts/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ManageClasses from "../pages/Dashboard/ManageClasses";
 import ManageUsers from "../pages/Dashboard/ManageUsers";
+import AddClass from "../pages/Dashboard/AddClass";
+import MyClasses from "../pages/Dashboard/MyClasses";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
       {
         path: "manage-users",
         element: <ManageUsers></ManageUsers>,
+      },
+      {
+        path: "add-class",
+        element: <AddClass></AddClass>,
+      },
+      {
+        path: "my-classes",
+        element: <MyClasses></MyClasses>,
       },
     ],
   },
