@@ -102,6 +102,7 @@ const ManageUsers = () => {
                       className={`text-white ${
                         user?.role === "admin" ? "bg-[#1D4CAA]" : "bg-[#3A5BF0]"
                       }   hover:bg-[#1D4CAA] px-7 py-2 rounded-md mr-2`}
+                      disabled={user?.role === "admin" ? true : false}
                     >
                       Make Admin
                     </button>
@@ -112,6 +113,7 @@ const ManageUsers = () => {
                           ? "bg-[#1D4CAA]"
                           : "bg-[#3A5BF0]"
                       }   hover:bg-[#1D4CAA] px-7 py-2 rounded-md`}
+                      disabled={user?.role === "instructor" ? true : false}
                     >
                       Make Instructor
                     </button>
