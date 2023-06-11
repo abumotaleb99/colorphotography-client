@@ -31,7 +31,12 @@ const DashboardLayout = () => {
               </Link>
             </li>
             <li>
-              <Link to="/manage-users" className="text-white px-2 mx-1">
+              <Link to="manage-classes" className="text-white px-2 mx-1">
+                Manage Classes
+              </Link>
+            </li>
+            <li>
+              <Link to="manage-users" className="text-white px-2 mx-1">
                 Manage Users
               </Link>
             </li>

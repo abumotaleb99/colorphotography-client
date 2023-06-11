@@ -7,6 +7,8 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import ManageClasses from "../pages/Dashboard/ManageClasses";
+import ManageUsers from "../pages/Dashboard/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Dashboard></Dashboard>,
+      },
+      {
+        path: "manage-classes",
+        element: <ManageClasses></ManageClasses>,
+      },
+      {
+        path: "manage-users",
+        element: <ManageUsers></ManageUsers>,
       },
     ],
   },
