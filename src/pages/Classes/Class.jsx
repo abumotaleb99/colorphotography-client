@@ -4,8 +4,15 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 const Class = ({ singleClass }) => {
-  const { _id, image, available_seats, class_name, instructor_name, price } =
-    singleClass;
+  const {
+    _id,
+    image,
+    available_seats,
+    class_name,
+    instructor_name,
+    instructor_email,
+    price,
+  } = singleClass;
 
   const { user } = useContext(AuthContext);
 
@@ -17,6 +24,7 @@ const Class = ({ singleClass }) => {
         classId: _id,
         class_name,
         instructor_name,
+        instructor_email,
         image,
         available_seats,
         price,
