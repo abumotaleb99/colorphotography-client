@@ -4,21 +4,26 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import useUser from "../../hooks/useUser";
 import Swal from "sweetalert2";
+import useCart from "../../hooks/useCart";
+import { useState } from "react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const MySelectedClasses = () => {
-  const [isUser] = useUser();
+  const { user, loading } = useContext(AuthContext);
 
-  const { data: cart = [], refetch } = useQuery(["cart"], async () => {
-    const res = await axios.get(
-      `http://localhost:5000/cart?email=${isUser?.email}`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-        },
-      }
-    );
-    return res.data;
-  });
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/carts?email=${user?.email}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setCart(data));
+  }, [user, cart]);
 
   const handleDelete = (item) => {
     Swal.fire({
@@ -114,9 +119,12 @@ const MySelectedClasses = () => {
                     </p>
                   </td>
                   <td className="px-4 py-4 border-b text-sm">
-                    <button className="text-white bg-[#3A5BF0] hover:bg-[#1D4CAA] px-5 py-2 rounded-md mr-2">
+                    <Link
+                      to={`../pay/${singleClass?.price}`}
+                      className="text-white bg-[#3A5BF0] hover:bg-[#1D4CAA] px-5 py-2 rounded-md mr-2"
+                    >
                       Pay
-                    </button>
+                    </Link>
                     <button
                       onClick={() => handleDelete(singleClass)}
                       className="text-white bg-[#3A5BF0] hover:bg-[#1D4CAA] px-3 py-2 rounded-md mr-2"
