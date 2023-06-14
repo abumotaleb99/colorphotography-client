@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 
-const Navbar = () => {
+const Navbar = ({ toggleMode }) => {
   const { user, logOut } = useContext(AuthContext);
 
   const handleLogOut = () => {
@@ -77,6 +77,11 @@ const Navbar = () => {
           <ul className=" menu-horizontal px-1">{navItems}</ul>
         </div>
         <div className="navbar-end">
+          <input
+            onClick={toggleMode}
+            type="checkbox"
+            className="toggle toggle-md mr-3"
+          />
           {user ? (
             <button
               onClick={handleLogOut}
