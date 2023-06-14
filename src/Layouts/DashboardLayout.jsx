@@ -83,6 +83,15 @@ const DashboardLayout = () => {
                 </li>
               </>
             )}
+            <div>
+              <ul className="border-t-2 mt-8">
+                <li>
+                  <Link to="/" className="text-white px-2 mx-1">
+                    Home
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </ul>
         </div>
       </div>

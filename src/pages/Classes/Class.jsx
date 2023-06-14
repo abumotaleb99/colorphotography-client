@@ -2,8 +2,11 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import useUser from "../../hooks/useUser";
 
 const Class = ({ singleClass }) => {
+  const [isUser] = useUser();
+
   const {
     _id,
     image,
@@ -83,7 +86,16 @@ const Class = ({ singleClass }) => {
           </p>
           <button
             onClick={() => handleAddToCart(singleClass)}
-            className="text-white bg-[#3A5BF0] hover:bg-[#1D4CAA] px-7 py-2 rounded-md"
+            className={`text-white ${
+              isUser?.role === "admin" || isUser?.role === "instructor"
+                ? "bg-[#1D4CAA]"
+                : "bg-[#3A5BF0]"
+            }   hover:bg-[#1D4CAA] px-2 py-2 rounded-md mr-2`}
+            disabled={
+              isUser?.role === "admin" || isUser?.role === "instructor"
+                ? true
+                : false
+            }
           >
             Select Class
           </button>
