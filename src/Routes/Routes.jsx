@@ -13,11 +13,13 @@ import AddClass from "../pages/Dashboard/AddClass";
 import MyClasses from "../pages/Dashboard/MyClasses";
 import MySelectedClasses from "../pages/Dashboard/MySelectedClasses";
 import Payment from "../pages/Dashboard/Payment";
+import Error from "../pages/Error/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
