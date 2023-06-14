@@ -9,6 +9,10 @@ const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 console.log(stripePromise);
 
 const Payment = () => {
+  useEffect(() => {
+    document.title = "ColorPhotography | Payment";
+  }, []);
+
   const price = useParams();
   return (
     <div>

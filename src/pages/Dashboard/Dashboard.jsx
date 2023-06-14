@@ -3,6 +3,10 @@ import useUser from "../../hooks/useUser";
 import moment from "moment/moment";
 
 const Dashboard = () => {
+  useEffect(() => {
+    document.title = "ColorPhotography | Dashboard";
+  }, []);
+
   const [isUser] = useUser();
 
   return (

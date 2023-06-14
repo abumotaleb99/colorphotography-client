@@ -4,6 +4,10 @@ import { useEffect } from "react";
 import Class from "./Class";
 
 const Classes = () => {
+  useEffect(() => {
+    document.title = "ColorPhotography | Classes";
+  }, []);
+
   const [allClasses, setAllClasses] = useState([]);
 
   useEffect(() => {

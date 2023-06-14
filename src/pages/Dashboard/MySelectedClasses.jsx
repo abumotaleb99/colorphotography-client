@@ -10,6 +10,10 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const MySelectedClasses = () => {
+  useEffect(() => {
+    document.title = "ColorPhotography | My Selected Classes";
+  }, []);
+
   const { user, loading } = useContext(AuthContext);
 
   const [cart, setCart] = useState([]);

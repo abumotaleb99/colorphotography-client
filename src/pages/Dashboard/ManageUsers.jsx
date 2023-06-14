@@ -4,6 +4,10 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const ManageUsers = () => {
+  useEffect(() => {
+    document.title = "ColorPhotography | Manage Users";
+  }, []);
+
   const { data: users = [], refetch } = useQuery(["users"], async () => {
     const res = await axios.get("http://localhost:5000/users", {
       headers: {

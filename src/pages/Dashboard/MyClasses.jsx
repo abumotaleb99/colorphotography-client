@@ -2,6 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const MyClasses = () => {
+  useEffect(() => {
+    document.title = "ColorPhotography | My Classes";
+  }, []);
+
   const { user } = useContext(AuthContext);
 
   const [myClasses, setMyClasses] = useState([]);

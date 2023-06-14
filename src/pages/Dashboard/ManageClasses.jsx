@@ -4,6 +4,10 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const ManageClasses = () => {
+  useEffect(() => {
+    document.title = "ColorPhotography | Manage Classes";
+  }, []);
+
   const [showModal, setShowModal] = useState(false);
 
   const { data: classes = [], refetch } = useQuery(["users"], async () => {
