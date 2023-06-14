@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const MyClasses = () => {
   useEffect(() => {
@@ -17,6 +18,14 @@ const MyClasses = () => {
         setMyClasses(data);
       });
   }, [user]);
+
+  const viewFeed = (feedback) => {
+    if (feedback) {
+      Swal.fire({
+        text: feedback,
+      });
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto py-4">
@@ -94,7 +103,10 @@ const MyClasses = () => {
                   </td>
                   <td className="px-4 py-4 border-b text-sm">
                     {singleClass?.status === "denied" ? (
-                      <button className="text-white bg-[#3A5BF0] hover:bg-[#1D4CAA] px-2 py-2 rounded-md mr-2">
+                      <button
+                        onClick={() => viewFeed(singleClass?.feedback)}
+                        className="text-white bg-[#3A5BF0] hover:bg-[#1D4CAA] px-2 py-2 rounded-md mr-2"
+                      >
                         View Feedback
                       </button>
                     ) : (
