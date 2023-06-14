@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useEffect } from "react";
 
 const ManageUsers = () => {
   useEffect(() => {

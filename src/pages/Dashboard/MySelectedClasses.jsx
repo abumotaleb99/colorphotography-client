@@ -1,10 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import useUser from "../../hooks/useUser";
 import Swal from "sweetalert2";
-import useCart from "../../hooks/useCart";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
