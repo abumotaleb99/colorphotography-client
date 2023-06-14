@@ -1,13 +1,12 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React from "react";
 import { useState } from "react";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
 
-const CheckOutForm = ({ price }) => {
+const CheckOutForm = ({ cartClass }) => {
   const { user } = useContext(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
@@ -17,13 +16,19 @@ const CheckOutForm = ({ price }) => {
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
 
+  const { price } = cartClass;
+
   useEffect(() => {
     axios
-      .post("http://localhost:5000/create-payment-intent", price, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-        },
-      })
+      .post(
+        "https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/create-payment-intent",
+        price,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
+      )
       .then((response) => {
         setClientSecret(response.data);
       });
@@ -86,14 +91,18 @@ const CheckOutForm = ({ price }) => {
       };
 
       axios
-        .post("http://localhost:5000/payments", payment, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-          },
-        })
+        .post(
+          "https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/payments",
+          payment,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+            },
+          }
+        )
         .then((response) => {
           if (response.data.insertedId) {
-            console.log("hurry");
+            console.log("Success");
           }
         });
     }
@@ -128,9 +137,10 @@ const CheckOutForm = ({ price }) => {
       </form>
       {cardError && <p className="text-red-600">{cardError}</p>}
       {transactionId && (
-        <p className="text-green-500">
-          Transaction complete with transactionId: {transactionId}
-        </p>
+        <>
+          <p className="text-green-500 pt-4">Payment Success!</p>
+          <p>Transaction ID: {transactionId}</p>
+        </>
       )}
     </>
   );

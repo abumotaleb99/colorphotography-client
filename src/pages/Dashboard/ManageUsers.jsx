@@ -10,18 +10,24 @@ const ManageUsers = () => {
   }, []);
 
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await axios.get("http://localhost:5000/users", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-      },
-    });
+    const res = await axios.get(
+      "https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/users",
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      }
+    );
     return res.data;
   });
 
   const handleMakeAdmin = (user) => {
-    fetch(`http://localhost:5000/users/admin/${user._id}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/users/admin/${user._id}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -39,9 +45,12 @@ const ManageUsers = () => {
   };
 
   const handleMakeInstructor = (user) => {
-    fetch(`http://localhost:5000/users/instructor/${user._id}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/users/instructor/${user._id}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

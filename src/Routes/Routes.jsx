@@ -72,8 +72,10 @@ const router = createBrowserRouter([
         element: <MySelectedClasses></MySelectedClasses>,
       },
       {
-        path: "pay/:price",
+        path: "pay/:id",
         element: <Payment></Payment>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/cart-class/${params.id}`),
       },
     ],
   },

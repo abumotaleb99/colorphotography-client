@@ -33,13 +33,16 @@ const Class = ({ singleClass }) => {
         price,
         email: user.email,
       };
-      fetch("http://localhost:5000/cart", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(selectedClass),
-      })
+      fetch(
+        "https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/cart",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(selectedClass),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.insertedId) {
@@ -97,7 +100,9 @@ const Class = ({ singleClass }) => {
                 : "bg-[#3A5BF0]"
             }   hover:bg-[#1D4CAA] px-2 py-2 rounded-md mr-2`}
             disabled={
-              isUser?.role === "admin" || isUser?.role === "instructor"
+              available_seats == 0 ||
+              isUser?.role === "admin" ||
+              isUser?.role === "instructor"
                 ? true
                 : false
             }

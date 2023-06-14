@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import useCart from "../../hooks/useCart";
 
 const MySelectedClasses = () => {
   useEffect(() => {
@@ -12,18 +13,23 @@ const MySelectedClasses = () => {
 
   const { user, loading } = useContext(AuthContext);
 
-  const [cart, setCart] = useState([]);
+  // const [cart, setCart] = useState([]);
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/carts?email=${user?.email}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setCart(data));
-  }, [user, cart]);
+  // useEffect(() => {
+  //   fetch(
+  //     `https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/carts?email=${user?.email}`,
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+  //       },
+  //     }
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => setCart(data));
+  // }, [user, cart]);
+
+  const [cart] = useCart();
 
   const handleDelete = (item) => {
     Swal.fire({
@@ -36,9 +42,12 @@ const MySelectedClasses = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/cart/${item._id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/cart/${item._id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
@@ -120,7 +129,7 @@ const MySelectedClasses = () => {
                   </td>
                   <td className="px-4 py-4 border-b text-sm">
                     <Link
-                      to={`../pay/${singleClass?.price}`}
+                      to={`../pay/${singleClass?._id}`}
                       className="text-white bg-[#3A5BF0] hover:bg-[#1D4CAA] px-5 py-2 rounded-md mr-2"
                     >
                       Pay
