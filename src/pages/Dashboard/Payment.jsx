@@ -15,8 +15,10 @@ const Payment = () => {
 
   const price = useParams();
   return (
-    <div>
-      <h2>Payment</h2>
+    <div className="max-w-lg mx-auto mt-5">
+      <h2 className="text-3xl font-semibold pb-4">
+        Enter your payment details!
+      </h2>
       <Elements stripe={stripePromise}>
         <CheckOutForm price={price}></CheckOutForm>
       </Elements>

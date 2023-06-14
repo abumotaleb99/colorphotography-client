@@ -54,7 +54,7 @@ const Class = ({ singleClass }) => {
         });
     } else {
       Swal.fire({
-        title: "Please login to order the food!",
+        title: "Please login to select the class!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -69,7 +69,12 @@ const Class = ({ singleClass }) => {
   };
 
   return (
-    <div className="bg-white rounded-md">
+    // <div className="bg-white rounded-md">
+    <div
+      className={`${
+        available_seats == 0 ? "bg-red-200" : "bg-white"
+      }  rounded-md`}
+    >
       <div>
         <img src={image} className="w-full rounded-md rounded-b-none" alt="" />
       </div>

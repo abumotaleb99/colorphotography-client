@@ -118,7 +118,11 @@ const CheckOutForm = ({ price }) => {
             },
           }}
         />
-        <button type="submit" disabled={!stripe}>
+        <button
+          type="submit"
+          className="text-white bg-[#3A5BF0] hover:bg-[#1D4CAA] px-7 py-2 mt-4 rounded-md"
+          disabled={!stripe}
+        >
           Pay
         </button>
       </form>
