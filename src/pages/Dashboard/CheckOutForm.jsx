@@ -18,7 +18,6 @@ const CheckOutForm = ({ cartClass }) => {
   const [transactionId, setTransactionId] = useState("");
   const [axiosSecure] = useAxiosSecure();
 
-  console.log("USer: ", user);
   const price = parseInt(cartClass.price);
 
   useEffect(() => {
@@ -26,7 +25,7 @@ const CheckOutForm = ({ cartClass }) => {
       console.log(res.data.clientSecret);
       setClientSecret(res.data.clientSecret);
     });
-  }, [price, axiosSecure]);
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -57,7 +56,7 @@ const CheckOutForm = ({ cartClass }) => {
     setProcessing(true);
 
     const { paymentIntent, error: confirmError } =
-      await stripe.confirmCardPayment(clientSecret.clientSecret, {
+      await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           type: "card",
           card: elements.getElement(CardElement),
@@ -82,6 +81,9 @@ const CheckOutForm = ({ cartClass }) => {
         email: user?.email,
         transactionId: paymentIntent.id,
         price,
+        className: cartClass.class_name,
+        date: new Date(),
+        cartId: cartClass._id,
       };
 
       axios

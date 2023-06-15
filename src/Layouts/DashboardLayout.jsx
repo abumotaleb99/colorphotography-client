@@ -81,6 +81,11 @@ const DashboardLayout = () => {
                     My Enrolled Classes
                   </Link>
                 </li>
+                <li>
+                  <Link to="payment-history" className="text-white px-2 mx-1">
+                    Payment History
+                  </Link>
+                </li>
               </>
             )}
             <div>

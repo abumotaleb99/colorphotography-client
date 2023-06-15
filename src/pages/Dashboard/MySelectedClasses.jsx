@@ -13,22 +13,6 @@ const MySelectedClasses = () => {
 
   const { user, loading } = useContext(AuthContext);
 
-  // const [cart, setCart] = useState([]);
-
-  // useEffect(() => {
-  //   fetch(
-  //     `http://localhost:5000/carts?email=${user?.email}`,
-  //     {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-  //       },
-  //     }
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => setCart(data));
-  // }, [user, cart]);
-
   const [cart] = useCart();
 
   const handleDelete = (item) => {

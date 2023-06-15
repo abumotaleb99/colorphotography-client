@@ -14,6 +14,7 @@ import MyClasses from "../pages/Dashboard/MyClasses";
 import MySelectedClasses from "../pages/Dashboard/MySelectedClasses";
 import Payment from "../pages/Dashboard/Payment";
 import Error from "../pages/Error/Error";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
         element: <Payment></Payment>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/cart-class/${params.id}`),
+      },
+      {
+        path: "payment-history",
+        element: <PaymentHistory></PaymentHistory>,
       },
     ],
   },
