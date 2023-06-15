@@ -84,11 +84,6 @@ const CheckOutForm = ({ cartClass }) => {
           : 1,
       };
 
-      // const totalEnrolled = cartClass?.totalEnrolled
-      //   ? cartClass?.totalEnrolled + 1
-      //   : 1;
-      console.log("Total Enrolled Num", cartClass?.total_enrolled);
-
       const payment = {
         email: user?.email,
         transactionId: paymentIntent.id,
