@@ -11,9 +11,7 @@ const Classes = () => {
   const [allClasses, setAllClasses] = useState([]);
 
   useEffect(() => {
-    fetch(
-      "https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/all-classes"
-    )
+    fetch("http://localhost:5000/all-classes")
       .then((res) => res.json())
       .then((data) => setAllClasses(data));
   }, []);

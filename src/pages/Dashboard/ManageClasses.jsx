@@ -13,24 +13,18 @@ const ManageClasses = () => {
   const [axiosSecure] = useAxiosSecure();
 
   const { data: classes = [], refetch } = useQuery(["users"], async () => {
-    const res = await axios.get(
-      "https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/classes",
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-        },
-      }
-    );
+    const res = await axios.get("http://localhost:5000/classes", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+      },
+    });
     return res.data;
   });
 
   const handleApproveClass = (singleClass) => {
-    fetch(
-      `https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/class/approve/${singleClass._id}`,
-      {
-        method: "PATCH",
-      }
-    )
+    fetch(`http://localhost:5000/class/approve/${singleClass._id}`, {
+      method: "PATCH",
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -49,12 +43,9 @@ const ManageClasses = () => {
   };
 
   const handleDenyClass = (singleClass) => {
-    fetch(
-      `https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/class/deny/${singleClass._id}`,
-      {
-        method: "PATCH",
-      }
-    )
+    fetch(`http://localhost:5000/class/deny/${singleClass._id}`, {
+      method: "PATCH",
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

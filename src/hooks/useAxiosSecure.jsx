@@ -1,15 +1,14 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../providers/AuthProvider";
+import useAuth from "./useAuth";
 
 const useAxiosSecure = () => {
-  const { logOut } = useContext(AuthContext);
+  const { logOut } = useAuth();
   const navigate = useNavigate();
 
   const axiosSecure = axios.create({
-    baseURL: "https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app",
+    baseURL: "http://localhost:5000",
   });
 
   useEffect(() => {

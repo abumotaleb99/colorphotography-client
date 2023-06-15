@@ -17,7 +17,7 @@ const MySelectedClasses = () => {
 
   // useEffect(() => {
   //   fetch(
-  //     `https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/carts?email=${user?.email}`,
+  //     `http://localhost:5000/carts?email=${user?.email}`,
   //     {
   //       method: "GET",
   //       headers: {
@@ -42,12 +42,9 @@ const MySelectedClasses = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(
-          `https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/cart/${item._id}`,
-          {
-            method: "DELETE",
-          }
-        )
+        fetch(`http://localhost:5000/cart/${item._id}`, {
+          method: "DELETE",
+        })
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {

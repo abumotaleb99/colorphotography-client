@@ -11,7 +11,7 @@ const useUser = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await axios.get(
-        `https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/users/${user?.email}`,
+        `http://localhost:5000/users/${user?.email}`,
         {
           method: "GET",
           headers: {

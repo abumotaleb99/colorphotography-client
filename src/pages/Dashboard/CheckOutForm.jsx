@@ -7,7 +7,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
 
 const CheckOutForm = ({ cartClass }) => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
 
@@ -16,19 +16,19 @@ const CheckOutForm = ({ cartClass }) => {
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
 
-  const { price } = cartClass;
+  // const { price } = cartClass;
+  const price = parseInt(cartClass.price);
+  console.log("printing caftClass", cartClass);
+  console.log("printing price", price);
+  // console.log("Cartless : ", cartClass);
 
   useEffect(() => {
     axios
-      .post(
-        "https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/create-payment-intent",
-        price,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-          },
-        }
-      )
+      .post("http://localhost:5000/create-payment-intent", price, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      })
       .then((response) => {
         setClientSecret(response.data);
       });
@@ -91,15 +91,11 @@ const CheckOutForm = ({ cartClass }) => {
       };
 
       axios
-        .post(
-          "https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/payments",
-          payment,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-            },
-          }
-        )
+        .post("http://localhost:5000/payments", payment, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        })
         .then((response) => {
           if (response.data.insertedId) {
             console.log("Success");

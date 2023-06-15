@@ -33,16 +33,13 @@ const Class = ({ singleClass }) => {
         price,
         email: user.email,
       };
-      fetch(
-        "https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/cart",
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(selectedClass),
-        }
-      )
+      fetch("http://localhost:5000/cart", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(selectedClass),
+      })
         .then((res) => res.json())
         .then((data) => {
           if (data.insertedId) {
