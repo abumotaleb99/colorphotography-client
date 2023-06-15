@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const CheckOutForm = ({ cartClass }) => {
   const { user, loading } = useContext(AuthContext);
@@ -15,24 +16,17 @@ const CheckOutForm = ({ cartClass }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
+  const [axiosSecure] = useAxiosSecure();
 
-  // const { price } = cartClass;
+  console.log("USer: ", user);
   const price = parseInt(cartClass.price);
-  console.log("printing caftClass", cartClass);
-  console.log("printing price", price);
-  // console.log("Cartless : ", cartClass);
 
   useEffect(() => {
-    axios
-      .post("http://localhost:5000/create-payment-intent", price, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-        },
-      })
-      .then((response) => {
-        setClientSecret(response.data);
-      });
-  }, []);
+    axiosSecure.post("/create-payment-intent", { price }).then((res) => {
+      console.log(res.data.clientSecret);
+      setClientSecret(res.data.clientSecret);
+    });
+  }, [price, axiosSecure]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
