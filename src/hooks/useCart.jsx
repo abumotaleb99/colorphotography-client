@@ -10,7 +10,7 @@ const useCart = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/carts?email=${user?.email}`,
+        `https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/carts?email=${user?.email}`,
         {
           headers: {
             authorization: `bearer ${token}`,

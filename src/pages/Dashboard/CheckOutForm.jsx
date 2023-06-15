@@ -104,11 +104,15 @@ const CheckOutForm = ({ cartClass }) => {
       };
 
       axios
-        .post("http://localhost:5000/payments", payment, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-          },
-        })
+        .post(
+          "https://b7a12-summer-camp-server-side-abumotaleb99.vercel.app/payments",
+          payment,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+            },
+          }
+        )
         .then((response) => {
           if (response.data.insertedId) {
             console.log("Success");
