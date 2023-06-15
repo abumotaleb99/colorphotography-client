@@ -11,6 +11,7 @@ const Class = ({ singleClass }) => {
     _id,
     image,
     available_seats,
+    total_enrolled,
     class_name,
     instructor_name,
     instructor_email,
@@ -30,6 +31,7 @@ const Class = ({ singleClass }) => {
         instructor_email,
         image,
         available_seats,
+        total_enrolled,
         price,
         email: user.email,
       };

@@ -22,7 +22,7 @@ const CheckOutForm = ({ cartClass }) => {
 
   useEffect(() => {
     axiosSecure.post("/create-payment-intent", { price }).then((res) => {
-      console.log(res.data.clientSecret);
+      // console.log(res.data.clientSecret);
       setClientSecret(res.data.clientSecret);
     });
   }, []);
@@ -77,6 +77,18 @@ const CheckOutForm = ({ cartClass }) => {
     if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
 
+      const updateDoc = {
+        availableSeats: cartClass.available_seats - 1,
+        totalEnrolled: cartClass?.totalEnrolled
+          ? cartClass?.totalEnrolled + 1
+          : 1,
+      };
+
+      // const totalEnrolled = cartClass?.totalEnrolled
+      //   ? cartClass?.totalEnrolled + 1
+      //   : 1;
+      console.log("Total Enrolled Num", cartClass?.total_enrolled);
+
       const payment = {
         email: user?.email,
         transactionId: paymentIntent.id,
@@ -84,8 +96,15 @@ const CheckOutForm = ({ cartClass }) => {
         instructorName: cartClass.instructor_name,
         instructorEmail: cartClass.instructor_email,
         price,
+        available_seats: cartClass?.available_seats
+          ? cartClass.available_seats - 1
+          : "",
+        total_enrolled: cartClass?.total_enrolled
+          ? cartClass.total_enrolled + 1
+          : 1,
         className: cartClass.class_name,
         date: new Date(),
+        classId: cartClass.classId,
         cartId: cartClass._id,
       };
 
