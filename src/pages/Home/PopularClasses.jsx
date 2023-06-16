@@ -1,5 +1,4 @@
 import React from "react";
-import img1 from "../../assets/classes/class1.jpg";
 import { Fade } from "react-awesome-reveal";
 import { useState } from "react";
 import { useEffect } from "react";

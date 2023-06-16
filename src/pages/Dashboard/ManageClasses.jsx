@@ -36,7 +36,6 @@ const ManageClasses = () => {
         console.log(data);
         if (data.modifiedCount) {
           refetch();
-          isSetDisable(true);
           Swal.fire({
             position: "center",
             icon: "success",
@@ -60,7 +59,6 @@ const ManageClasses = () => {
         console.log(data);
         if (data.modifiedCount) {
           refetch();
-          isSetDisable(true);
           Swal.fire({
             position: "center",
             icon: "success",
